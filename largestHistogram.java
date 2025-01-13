@@ -95,3 +95,70 @@ public class largestHistogram {
     }
     
 }
+
+
+
+
+
+// chatgpt optimsised code==============================
+
+
+// import java.util.*;
+
+// public class LargestHistogram {
+
+//     public static int largestArea(int[] arr) {
+//         int maxArea = 0;
+//         int n = arr.length;
+
+//         // Arrays for Next Smaller Right (NSR) and Next Smaller Left (NSL)
+//         int[] nsr = new int[n];
+//         int[] nsl = new int[n];
+
+//         Stack<Integer> stack = new Stack<>();
+
+//         // Calculate NSR
+//         for (int i = n - 1; i >= 0; i--) {
+//             while (!stack.isEmpty() && arr[i] <= arr[stack.peek()]) {
+//                 stack.pop();
+//             }
+//             nsr[i] = stack.isEmpty() ? n : stack.peek();
+//             stack.push(i);
+//         }
+
+//         // Clear the stack for NSL computation
+//         stack.clear();
+
+//         // Calculate NSL
+//         for (int i = 0; i < n; i++) {
+//             while (!stack.isEmpty() && arr[i] <= arr[stack.peek()]) {
+//                 stack.pop();
+//             }
+//             nsl[i] = stack.isEmpty() ? -1 : stack.peek();
+//             stack.push(i);
+//         }
+
+//         // Calculate maximum area
+//         for (int i = 0; i < n; i++) {
+//             int width = nsr[i] - nsl[i] - 1;
+//             int area = width * arr[i];
+//             maxArea = Math.max(maxArea, area);
+//         }
+
+//         return maxArea;
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         System.out.print("Enter number of bars in the histogram: ");
+//         int n = sc.nextInt();
+//         int[] arr = new int[n];
+//         System.out.println("Enter heights of the histogram bars: ");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int largestArea = largestArea(arr);
+//         System.out.println("The largest rectangle area in the histogram is: " + largestArea);
+//     }
+// }
