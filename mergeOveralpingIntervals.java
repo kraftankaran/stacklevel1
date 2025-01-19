@@ -1,7 +1,7 @@
 import java.util.*;
 import java.lang.*;
 
-import javax.print.attribute.standard.MediaSize.Other;
+
 
 public class mergeOveralpingIntervals {
     public static class pair implements Comparable<pair>{
@@ -41,9 +41,39 @@ public class mergeOveralpingIntervals {
             arr[i][1]=sc.nextInt();
         }
 
-        pair intervals[]= new pair[n];
+        pair pairs []= new pair[n];
 
         for(int i=0;i<arr.length;i++){
+            pairs[i]=new pair(arr[i][0], arr[i][1]);
+
+            
+        }
+        Arrays.sort(pairs);
+        Stack<pair> st = new Stack<>();
+        for(int i =0;i<pairs.length;i++){
+            if(i==0){
+                st.push(pairs[i]);
+
+            }else if(pairs[i].st< st.peek().et){
+
+                st.peek().et =Math.max(pairs[i].et, st.peek().et);
+
+            }
+            else{
+                st.push(pairs[i]);
+            }
+
+        }
+
+        Stack<pair> answer = new Stack<>();
+        while(st.size()>0){
+            answer.push(st.pop());
+
+        }
+        while (answer.size()>0) {
+
+            pair obj = answer.pop();
+            System.out.println( "st " + obj.st + "et "+ obj.et);
             
         }
 
